@@ -1,0 +1,10 @@
+{
+  "name": "shopsmart-ecommerce-capstone",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Responsive e-commerce capstone using vanilla JavaScript and FakeStoreAPI",
+  "scripts": {
+    "start": "python -m http.server 8080"
+  }
+}

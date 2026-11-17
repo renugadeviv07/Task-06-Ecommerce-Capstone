@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="ShopSmart — a responsive e-commerce capstone storefront with product search, cart, orders and admin CRUD.">
+  <title>ShopSmart | Everyday finds, made simple</title>
+  <link rel="preconnect" href="https://fakestoreapi.com">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="announcement">Free shipping on demo orders over $50 · Secure checkout simulation</div>
+  <header class="site-header">
+    <a class="brand" href="#home" aria-label="ShopSmart home"><span class="brand-mark">S</span> ShopSmart<span class="brand-dot">.</span></a>
+    <nav class="main-nav" aria-label="Main navigation">
+      <button class="nav-link active" data-view="home">Home</button>
+      <button class="nav-link" data-view="shop">Shop</button>
+      <button class="nav-link" data-view="orders">My orders</button>
+      <button class="nav-link admin-nav" data-view="admin" hidden>Admin</button>
+    </nav>
+    <div class="header-actions">
+      <button class="icon-button" id="account-button" aria-label="Sign in">Sign in</button>
+      <button class="cart-button" data-view="cart" aria-label="Open shopping cart">Cart <span id="cart-badge">0</span></button>
+      <button class="menu-toggle" id="menu-toggle" aria-label="Toggle navigation">☰</button>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="view active" id="view-home">
+      <div class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">THE EVERYDAY EDIT</p>
+          <h1>Good finds.<br><em>Better days.</em></h1>
+          <p class="hero-description">Thoughtful picks for your style, your space and everything in between.</p>
+          <button class="button button-dark" data-view="shop">Explore the collection <span>→</span></button>
+          <div class="hero-note"><span class="avatar-stack">● ● ●</span> Curated picks for curious people</div>
+        </div>
+        <div class="hero-art" aria-label="Decorative shopping collection illustration">
+          <div class="art-circle"></div><div class="art-card art-card-one"><span>THE<br>GOOD<br>STUFF</span></div><div class="art-card art-card-two"><span>✳</span></div><div class="art-spark">✦</div>
+        </div>
+      </div>
+      <section class="section-wrap category-section">
+        <div class="section-heading"><div><p class="eyebrow">BROWSE YOUR WAY</p><h2>Shop by category</h2></div><button class="text-button" data-view="shop">View all products →</button></div>
+        <div class="category-tiles" id="home-categories">
+          <button class="category-tile" data-home-category="electronics"><span class="tile-icon">⌁</span><b>Electronics</b><small>Useful little upgrades</small></button>
+          <button class="category-tile" data-home-category="jewelery"><span class="tile-icon">✧</span><b>Jewellery</b><small>Details that shine</small></button>
+          <button class="category-tile" data-home-category="men's clothing"><span class="tile-icon">◒</span><b>Men's style</b><small>Everyday essentials</small></button>
+          <button class="category-tile" data-home-category="women's clothing"><span class="tile-icon">✿</span><b>Women's style</b><small>Made to feel good</small></button>
+        </div>
+      </section>
+      <section class="section-wrap featured-section"><div class="section-heading"><div><p class="eyebrow">HANDPICKED FOR YOU</p><h2>Popular right now</h2></div><button class="text-button" data-view="shop">Shop everything →</button></div><div class="product-grid" id="featured-grid"></div></section>
+    </section>
+
+    <section class="view section-wrap" id="view-shop">
+      <div class="page-heading"><p class="eyebrow">THE SHOP</p><h1>Find your next favourite.</h1><p>Explore the collection and discover something useful, beautiful or both.</p></div>
+      <div class="shop-toolbar"><label class="search-box"><span>⌕</span><input id="search-input" type="search" placeholder="Search products..." aria-label="Search products"></label><select id="sort-select" aria-label="Sort products"><option value="featured">Featured</option><option value="name">Name: A to Z</option><option value="low">Price: low to high</option><option value="high">Price: high to low</option><option value="rating">Top rated</option></select></div>
+      <div class="filter-row" id="category-filters"><button class="filter-chip selected" data-category="all">All products</button></div>
+      <p class="result-line" id="result-count" aria-live="polite">Loading products…</p><div class="product-grid" id="shop-grid"></div><div class="notice" id="api-notice" role="status" hidden></div>
+    </section>
+
+    <section class="view section-wrap" id="view-cart">
+      <div class="page-heading"><p class="eyebrow">YOUR SELECTION</p><h1>Shopping cart</h1><p>Your picks, all in one place.</p></div>
+      <div class="cart-layout"><div id="cart-lines" class="cart-lines"></div><aside class="order-summary"><h2>Order summary</h2><div class="summary-row"><span>Subtotal</span><b id="cart-subtotal">$0.00</b></div><div class="summary-row"><span>Shipping</span><b id="cart-shipping">$0.00</b></div><div class="summary-row total"><span>Total</span><b id="cart-total">$0.00</b></div><button class="button button-dark full-width" id="checkout-button">Continue to checkout</button><p class="fine-print">Demo checkout only. No payment will be collected.</p></aside></div>
+    </section>
+
+    <section class="view section-wrap" id="view-orders">
+      <div class="page-heading"><p class="eyebrow">ORDER HISTORY</p><h1>Your orders</h1><p>Keep track of your demo purchases.</p></div><div id="orders-list" class="orders-list"></div>
+    </section>
+
+    <section class="view section-wrap" id="view-admin">
+      <div class="page-heading admin-heading"><div><p class="eyebrow">STORE MANAGEMENT</p><h1>Admin workspace</h1><p>Add, update and remove products in your local store catalogue.</p></div><button class="button button-dark" id="add-product-button">＋ Add product</button></div>
+      <div class="admin-stats"><article><span>Products</span><b id="admin-product-count">0</b></article><article><span>Orders</span><b id="admin-order-count">0</b></article><article><span>Store mode</span><b>Demo</b></article></div>
+      <div class="admin-table-wrap"><table class="admin-table"><thead><tr><th>Product</th><th>Category</th><th>Price</th><th>Actions</th></tr></thead><tbody id="admin-products"></tbody></table></div>
+      <p class="fine-print">Changes made here are saved in this browser using LocalStorage. They do not modify the external FakeStoreAPI.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer"><div class="footer-top"><a class="brand" href="#home"><span class="brand-mark">S</span> ShopSmart<span class="brand-dot">.</span></a><p>Good things for everyday living.</p><p class="footer-links">A student capstone project · Demo storefront</p></div><div class="footer-bottom"><span>© 2026 ShopSmart Demo</span><span>Built with HTML · CSS · JavaScript</span></div></footer>
+
+  <dialog id="auth-dialog" class="modal"><form method="dialog" class="modal-card" id="auth-form"><button class="modal-close" aria-label="Close">×</button><p class="eyebrow">WELCOME TO SHOPSMART</p><h2 id="auth-title">Sign in</h2><p class="modal-subtitle" id="auth-subtitle">Sign in to save your cart and view orders.</p><label>Email<input id="auth-email" type="email" placeholder="you@example.com" required></label><label>Password<input id="auth-password" type="password" placeholder="At least 4 characters" minlength="4" required></label><label id="name-field" hidden>Full name<input id="auth-name" type="text" placeholder="Your name"></label><p class="form-error" id="auth-error" role="alert"></p><button class="button button-dark full-width" id="auth-submit" value="submit">Sign in</button><button type="button" class="text-button switch-auth" id="switch-auth">Create an account</button><div class="demo-credentials"><b>Demo admin:</b> admin@shopsmart.demo / admin123</div></form></dialog>
+
+  <dialog id="product-dialog" class="modal"><form method="dialog" class="modal-card" id="product-form"><button class="modal-close" aria-label="Close">×</button><p class="eyebrow">STORE MANAGEMENT</p><h2 id="product-dialog-title">Add product</h2><input type="hidden" id="edit-product-id"><label>Product name<input id="product-name" required maxlength="90" placeholder="Product name"></label><label>Category<select id="product-category"><option value="electronics">Electronics</option><option value="jewelery">Jewellery</option><option value="men's clothing">Men's clothing</option><option value="women's clothing">Women's clothing</option></select></label><label>Price ($)<input id="product-price" type="number" min="0.01" step="0.01" required></label><label>Image URL<input id="product-image" type="url" placeholder="https://..."></label><label>Description<textarea id="product-description" rows="3" maxlength="400" required></textarea></label><p class="form-error" id="product-error" role="alert"></p><button class="button button-dark full-width" id="save-product-button" value="submit">Save product</button></form></dialog>
+
+  <dialog id="checkout-dialog" class="modal"><form method="dialog" class="modal-card" id="checkout-form"><button class="modal-close" aria-label="Close">×</button><p class="eyebrow">DEMO CHECKOUT</p><h2>Almost yours.</h2><p class="modal-subtitle">Enter delivery details to place a simulated order. No payment details are needed.</p><label>Full name<input id="delivery-name" required></label><label>Delivery address<textarea id="delivery-address" rows="3" required></textarea></label><label>Contact email<input id="delivery-email" type="email" required></label><button class="button button-dark full-width" value="submit">Place demo order</button></form></dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
